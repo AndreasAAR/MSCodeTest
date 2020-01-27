@@ -1,0 +1,120 @@
+'''
+Auth: Andreas Ährlund-Richter
+Using algorithm theorized to solve code-test at Multisoft
+proposed at Codeproject.com by Richard Deeming
+'''
+
+'''
+the following code is written in a aspx- site.
+
+...
+...
+long sum = 0;
+for ( int i = 0; i < 888; i++)
+{
+// GetIntFromSQL returns an int from an SQL-statement-resultset with one
+// row, one column
+sum += GetIntFromSQL("EXEC dbo.ObscureProcedure @i = "+ i.ToString());
+};
+Response.Write(sum.ToString());
+...
+...
+
+
+Proceduren i Microsoft SQL Server ser ut enligt:
+CREATE PROCEDURE dbo.ObscureProcedure
+@i int
+AS
+BEGIN
+SELECT
+CASE
+WHEN @i < 260 THEN
+COUNT(*) * @i
+ELSE
+COUNT(*) * 260
+END AS ObscureCount
+FROM
+VacationGadget
+WHERE
+@i < 714
+END
+
+if you drive it in i Microsoft SQL Server Management Studio the following procedure ...
+
+EXEC dbo.ObscureProcedure @i = 528
+
+... the you get :
+ObscureCount
+------------
+3138460
+
+(1 row(s) affected)
+
+'''
+
+'''
+-----------------------Time for some mathematical magic! :)
+
+Breaking the stored procedure down:
+If @i is greater than or equal to 714, it returns nothing;
+If @i is greater than or equal to 260, it returns 260 × C, where C is the number of records in the VacationGadget table;
+If @i is less than 260, it returns @i × C;
+
+With your sample run, @i is 528, and the result is 3,138,460. Therefore, since @i is greater than 260, we can deduce that C = 3,138,460 ÷ 260 = 12,071.
+
+Now to the loop.
+We can discount the first iteration, since 0 × anything = 0.
+We can probably discount anything from 714 to 888 - assuming your GetIntFromSQL method does the right thing when the stored procedure doesn't return any results.
+For 1 to 259, the result from SQL will be i × C.
+Therefore, the total sum for that part of the loop will be:
+(the sum of integers from 1 to 259) × C.
+For 260 to 713, the result from SQL will be 260 × C.
+Therefore, the total sum for that part of the loop will be (714 - 260) × 260 × C;
+'''
+
+
+
+
+--------------------------------We have the following parameters from the test:
+'''
+
+Följande C#-kod körs i en aspx-sida.
+
+
+long sum = 0;
+for (int i = 0; i < 835; i++) {
+   // GetIntFromSQL returns an int from an SQL-statement-resultset with one
+   // row, one column
+   sum += GetIntFromSQL("EXEC dbo.ObscureProcedure @i = " + i.ToString());
+}
+Response.Write(sum.ToString());
+...
+
+Proceduren i Microsoft SQL Server ser ut enligt:
+
+CREATE PROCEDURE dbo.ObscureProcedure
+   @i INT
+AS
+BEGIN
+   SELECT CASE WHEN @i < 245 THEN COUNT(*) * @i ELSE COUNT(*) * 245 END AS ObscureCount
+   FROM VacationGadget
+   WHERE @i < 597
+END
+...
+
+
+ Kör man proceduren i Microsoft SQL Server Management Studio enligt ...
+
+EXEC dbo.ObscureProcedure @i = 406
+ ... så får man svaret:
+
+ObscureCount
+------------
+2947105
+(1 row(s) affected)
+
+
+ Vilket tal skulle C#-koden högst upp skriva ut?
+'''
+
+Our cutoff for returning nothing is 597.
