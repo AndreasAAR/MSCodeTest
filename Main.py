@@ -1,46 +1,29 @@
-'''
-Auth: Andreas Ährlund-Richter
-Using algorithm theorized to solve code-test at Multisoft
-proposed at Codeproject.com by Richard Deeming
-'''
 
-#Calc number of rows in the database "Vacation" COUNT(*), its "C" in the formula in " The Tests and Background "
+import re
 
-#We use the example call
-# EXEC dbo.ObscureProcedure @i = 406
-#That gives
-'''
-ObscureCount
-------------
-2947105
-(1 row(s) affected)
-'''
-#We know that anything not @i < 245   will be 245 times the @i parameter.
-#ELSE COUNT(*) * 245
-fixedNum = 245 #Its the number in the SQL statement for ELSE
-rowCount =  2947105/fixedNum
-rowCount = rowCount
-print("rowcount " + str(rowCount))
+#ELSE COUNT(*) * 292 END
+from Tokenizer import Tokenizer
 
-#Now we have to figure out the actual calculation of the for loop.
+testString = "for (int i = 0; i < 891; i++) {"
+testPattern = "\< \d*\; i\+\+\)"
+test = re.search(testPattern , testString)
+print(test)
 
-#our end variable
-sum = 0
-#The iterations in the loop
-iters = 835-1
-iterLimit = 597-1
-if iters > iterLimit :
-    iters = iterLimit
-print("iterations " + str(iters))
+digits ="[0-9]+"
+digits = re.search(digits,test.group()).group()
 
 
+print(digits)
 
-for i in range(iters+1):
-    print(i)
-    if i < fixedNum:
-        sum += rowCount*i
-    if i >= fixedNum:
-        sum += rowCount*fixedNum
+print("Enter/Paste your content. Ctrl-D or Ctrl-Z ( windows ) to save it.")
+contents = []
+while True:
+    try:
+        line = input()
+    except EOFError:
+        break
+    contents.append(line)
 
-
-print(sum)
+inputArray = contents
+tokenizer = Tokenizer(inputArray)
+print(tokenizer.getTestI())
