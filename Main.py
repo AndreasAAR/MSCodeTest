@@ -1,3 +1,7 @@
+'''
+Main runs the other classes, takes input, and will calculate
+'''
+
 
 import re
 
@@ -26,4 +30,6 @@ while True:
 
 inputArray = contents
 tokenizer = Tokenizer(inputArray)
-print(tokenizer.getTestI())
+print(tokenizer.getIterator())
+print(tokenizer.getFixed())
+print(tokenizer.getTestIterator())
