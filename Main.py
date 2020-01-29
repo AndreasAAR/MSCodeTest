@@ -6,6 +6,7 @@ Main runs the other classes, takes input, and will calculate
 import re
 
 #ELSE COUNT(*) * 292 END
+from Calculator import Calculator
 from Tokenizer import Tokenizer
 
 
@@ -22,10 +23,5 @@ while True:
 inputArray = contents
 tokenizer = Tokenizer(inputArray)
 calculator = Calculator(tokenizer)
+calculator.calculate()
 
-
-print(tokenizer.getIterator())
-print(tokenizer.getFixed())
-print(tokenizer.getTestInput())
-print(tokenizer.getIterlimit())
-print(tokenizer.getTestResult())

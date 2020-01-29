@@ -29,27 +29,29 @@ class Calculator:
         self.iterLimit = tokenizer.getIterlimit()
         self.testResult = tokenizer.getTestResult()
 
-    fixedNum = 245 #Its the number in the SQL statement for ELSE
-    rowCount =  2947105/fixedNum
-    rowCount = rowCount
-    print("rowcount " + str(rowCount))
+    def calculate(self):
+        print(self.testResult)
+        print(self.fixedNum)
 
-    #Now we have to figure out the actual calculation of the for loop.
+        rowCount =  int(self.testResult)/int(self.fixedNum)
 
-    #our end variable
-    sum = 0
-    #The iterations in the loop
-    iters = 835-1
-    iterLimit = 597-1
-    if iters > iterLimit :
-        iters = iterLimit
-    print("iterations " + str(iters))
+        #Now we have to figure out the actual calculation of the for loop.
+        #our end variable
+        sum = 0
+        #The iterations in the loop
+        iters = int(self.iteratorVal)-1
+        iterLimit = int(self.iterLimit)-1
+        if iters > iterLimit :
+            iters = iterLimit
+        print("iterations " + str(iters))
 
-    for i in range(iters+1):
-        print(i)
-        if i < fixedNum:
-            sum += rowCount*i
-        if i >= fixedNum:
-            sum += rowCount*fixedNum
+        fixedNum = int(self.fixedNum)
 
-    print(sum)
+        for i in range(iters+1):
+            print(i)
+            if i < fixedNum:
+                sum += rowCount*i
+            if i >= fixedNum:
+                sum += rowCount*fixedNum
+        print("Answer: ")
+        print(sum)
