@@ -21,6 +21,14 @@ ObscureCount
 #ELSE COUNT(*) * 245
 
 class Calculator:
+
+    def __init__(self, tokenizer):
+        self.fixedNum = tokenizer.getFixed()
+        self.iteratorVal = tokenizer.getIterator()
+        self.testInput = tokenizer.getTestInput()
+        self.iterLimit = tokenizer.getIterlimit()
+        self.testResult = tokenizer.getTestResult()
+
     fixedNum = 245 #Its the number in the SQL statement for ELSE
     rowCount =  2947105/fixedNum
     rowCount = rowCount

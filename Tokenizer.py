@@ -10,22 +10,21 @@ class Tokenizer:
     def __init__(self, inputArray):
         self.fixedNum = self.setter(inputArray, "(ELSE COUNT\(\*\) \* )\d* END")
         self.iteratorVal = self.setter(inputArray, "\< \d*\; i\+\+\)")
-        self.testIterator = self.setter(inputArray, "EXEC dbo.ObscureProcedure @i = \d+")
+        self.testInput = self.setter(inputArray, "EXEC dbo.ObscureProcedure @i = \d+")
+        self.iterLimit = self.setter(inputArray, "WHERE @i < \d*")
+        self.testResult= self.setter(inputArray, "^\d+$")
         #self.iters
-        #self.iterLimit
+
 
     def setter(self,inputArray,pattern):
         return self.getToken(pattern, inputArray)
 
     def getToken(self, pattern, inputArray):
         token = 0
+        digits = "[0-9]+"
         for i in inputArray:
             test = re.search(pattern, i)
-            print(pattern)
-            print(i)
-            print(test)
             if not isinstance(test, type(None)):
-                digits = "[0-9]+"
                 if not isinstance(re.search(digits, test.group()) , type(None)):
                     token = re.search(digits, test.group()).group()
                 break
@@ -39,5 +38,11 @@ class Tokenizer:
     def getIterator(self):
         return self.iteratorVal
 
-    def getTestIterator(self):
-        return self.testIterator
+    def getTestInput(self):
+        return self.testInput
+
+    def getIterlimit(self):
+        return self.iterLimit
+
+    def getTestResult(self):
+        return self.testResult

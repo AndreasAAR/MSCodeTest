@@ -8,18 +8,9 @@ import re
 #ELSE COUNT(*) * 292 END
 from Tokenizer import Tokenizer
 
-testString = "for (int i = 0; i < 891; i++) {"
-testPattern = "\< \d*\; i\+\+\)"
-test = re.search(testPattern , testString)
-print(test)
-
-digits ="[0-9]+"
-digits = re.search(digits,test.group()).group()
 
 
-print(digits)
-
-print("Enter/Paste your content. Ctrl-D or Ctrl-Z ( windows ) to save it.")
+print("Enter/Paste the content from the webpage(select all with ctrl or cmd + a and copy paste in terminal). \n Ctrl-D or Ctrl-Z ( windows ) to run program it.")
 contents = []
 while True:
     try:
@@ -30,6 +21,11 @@ while True:
 
 inputArray = contents
 tokenizer = Tokenizer(inputArray)
+calculator = Calculator(tokenizer)
+
+
 print(tokenizer.getIterator())
 print(tokenizer.getFixed())
-print(tokenizer.getTestIterator())
+print(tokenizer.getTestInput())
+print(tokenizer.getIterlimit())
+print(tokenizer.getTestResult())
