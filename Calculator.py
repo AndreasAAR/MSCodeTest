@@ -30,28 +30,29 @@ class Calculator:
         self.testResult = tokenizer.getTestResult()
 
     def calculate(self):
-        print(self.testResult)
-        print(self.fixedNum)
 
-        rowCount =  int(self.testResult)/int(self.fixedNum)
-
+        rowCount =  int( int(self.testResult)/int(self.fixedNum))
+        print("Rowcount")
+        print(rowCount)
         #Now we have to figure out the actual calculation of the for loop.
         #our end variable
         sum = 0
         #The iterations in the loop
         iters = int(self.iteratorVal)-1
+
         iterLimit = int(self.iterLimit)-1
         if iters > iterLimit :
             iters = iterLimit
-        print("iterations " + str(iters))
+        print("Final iteration")
+        print(iters)
 
         fixedNum = int(self.fixedNum)
 
         for i in range(iters+1):
-            print(i)
             if i < fixedNum:
                 sum += rowCount*i
             if i >= fixedNum:
                 sum += rowCount*fixedNum
+
         print("Answer: ")
-        print(sum)
+        print(int(sum))
