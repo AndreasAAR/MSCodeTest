@@ -20,6 +20,10 @@ while True:
       break
   contents.append(line)
 
+
+
+
+
 inputArray = contents
 tokenizer = Tokenizer(inputArray)
 

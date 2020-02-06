@@ -1,3 +1,5 @@
+import webbrowser
+
 '''
 Auth: Andreas Ährlund-Richter
 Using algorithm theorized to solve code-test at Multisoft
@@ -49,10 +51,30 @@ class Calculator:
         fixedNum = int(self.fixedNum)
 
         for i in range(iters+1):
+            #print(i)
             if i < fixedNum:
                 sum += rowCount*i
             if i >= fixedNum:
                 sum += rowCount*fixedNum
 
+        htmlTestVariabel = "TESTTEXT"
+        html_str = """<html>
+          <head></head>
+          <body>
+            <p>Tack för att du använde kodtestlösaren.<br>
+               Lägg in det här på testsidan:<br>
+               <br><br><h1>{code}</h1><br>
+               <img src="http://domain.com/footer.jpg">
+            </p>
+          </body>
+        </html>
+        """.format(code=int(sum))
+
+        htmlPath = "answer.html"
+
+        Html_file = open(htmlPath, "w")
+        Html_file.write(html_str)
+        Html_file.close()
+        webbrowser.open('file://'+ "/Users/AAR/Dropbox/Andreas/PLUGG_JOBB/VT2020/Jobbsök/Test/MSCodeTest/answer.html")
         print("Answer: ")
         print(int(sum))
